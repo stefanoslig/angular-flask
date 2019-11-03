@@ -17,7 +17,7 @@ const mode = createSelector(
 
 const savedGames = createSelector(
   dashboardState,
-    state => state.savedGames
+    state => state.savedGames.slice(0, 10), // a list of maximum 10 games should be visible
 );
 
 export const dashboardQuery = {

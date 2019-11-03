@@ -26,22 +26,29 @@
         <label class="custom-control-label" for="mode">Difficult</label>
     </fieldset>
 </section>
-<section *ngIf="(scores$ | async).length" class="list">
-    <label>Scores</label>
-    <ul>
-        <li *ngFor="let item of scores$ | async">
-            <span>{{ item.username }}</span>
-            <span>{{ item.score }}</span>
-            <span>{{ item.created_date | date }}</span>
-        </li>
-    </ul>
-</section>
-<section *ngIf="(savedGames$ | async).length" class="list">
-    <label>Saved Games</label>
-    <ul>
-        <li *ngFor="let item of savedGames$ | async" [routerLink]="['/gameboard']" [queryParams]="{state: item.state, username: item.username}" skipLocationChange="true">
-            <span>{{ item.username }}</span>
-            <span>{{ item.created_date | date }}</span>
-        </li>
-    </ul>
+<section class="lists">
+    <div *ngIf="(scores$ | async).length" class="list">
+        <label>Scores</label>
+        <ul>
+            <li *ngFor="let item of scores$ | async">
+                <span>{{ item.username }}</span>
+                <span>{{ item.score }}</span>
+                <span>{{ item.created_date | date }}</span>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="(savedGames$ | async).length" class="list saved-games">
+        <label>Saved Games:</label>
+        <ul>
+            <li
+                *ngFor="let item of savedGames$ | async"
+                [routerLink]="['/gameboard']"
+                [queryParams]="{ state: item.state, username: item.username }"
+                skipLocationChange="true"
+            >
+                <span>{{ item.username }}</span>
+                <span>{{ item.created_date | date }}</span>
+            </li>
+        </ul>
+    </div>
 </section>

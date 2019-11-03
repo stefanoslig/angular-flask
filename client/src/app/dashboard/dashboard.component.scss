@@ -11,12 +11,22 @@
         flex-direction: column;
     }
 
-    & section {
+    & section.username {
         flex: 1;
         padding-left: 3em;
 
         @media screen and (max-width: 600px) {
             padding: 1em;
+        }
+    }
+
+    & section.lists {
+        flex: 1;
+        flex-direction: column;
+        padding-left: 3em;
+
+        & .saved-games {
+          margin-top: 1.5em;
         }
     }
 

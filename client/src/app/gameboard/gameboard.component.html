@@ -1,0 +1,23 @@
+<section>
+    <div class="correct__chars">
+        <span class="correct__char" *ngFor="let pchar of progressWord$ | async">{{ pchar }}</span>
+    </div>
+    <div class="empty__chars">
+        <span class="empty__char" *ngFor="let item of (word$ | async)?.split('')">_</span>
+    </div>
+    <div class="wrong__chars">
+        <span class="wrong__char" *ngFor="let wchar of wrongChars$ | async">{{ wchar }}</span>
+    </div>
+    <div class="game__info">
+        <span>lives: {{ lives$ | async }}</span>
+        <span>timer: {{ timer$ | async }}</span>
+    </div>
+    <button class="save-game" (click)="saveGame()">Save Game</button>
+</section>
+<app-result
+    *ngIf="result$ | async as result"
+    [result]="result"
+    [score]="score$ | async"
+    (newGame)="onNewGame()"
+    (saveScore)="onSaveScore($event)"
+></app-result>

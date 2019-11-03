@@ -1,0 +1,47 @@
+<section class="username">
+    <fieldset>
+        <legend>
+            Player name
+        </legend>
+        <input class="username" [(ngModel)]="username" #ctrl="ngModel" required (change)="addUsername(username)" />
+        <button [disabled]="!ctrl.valid" (click)="startGame()">Start Game</button>
+    </fieldset>
+    <fieldset>
+        <input
+            type="radio"
+            [attr.checked]="true"
+            [value]="mode.easy"
+            name="mode"
+            [ngModel]="mode$ | async"
+            (change)="onChangeMode(mode.easy)"
+        />
+        <label class="custom-control-label" for="mode">Easy</label>
+        <input
+            type="radio"
+            [value]="mode.difficult"
+            name="mode"
+            [ngModel]="mode$ | async"
+            (change)="onChangeMode(mode.difficult)"
+        />
+        <label class="custom-control-label" for="mode">Difficult</label>
+    </fieldset>
+</section>
+<section *ngIf="(scores$ | async).length" class="list">
+    <label>Scores</label>
+    <ul>
+        <li *ngFor="let item of scores$ | async">
+            <span>{{ item.username }}</span>
+            <span>{{ item.score }}</span>
+            <span>{{ item.created_date | date }}</span>
+        </li>
+    </ul>
+</section>
+<section *ngIf="(savedGames$ | async).length" class="list">
+    <label>Saved Games</label>
+    <ul>
+        <li *ngFor="let item of savedGames$ | async" [routerLink]="['/gameboard']" [queryParams]="{state: item.state, username: item.username}" skipLocationChange="true">
+            <span>{{ item.username }}</span>
+            <span>{{ item.created_date | date }}</span>
+        </li>
+    </ul>
+</section>

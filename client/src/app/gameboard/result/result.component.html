@@ -1,0 +1,6 @@
+<h1>{{ result }}</h1>
+<h3>Score: {{ score }}</h3>
+<div class="result__buttons">
+  <button class="result__new-game" (click)="newGame.emit()">New Game</button>
+  <button class="result__save-score" (click)="saveScore.emit(score)">Save Score</button>
+</div>
